@@ -4,18 +4,17 @@ services:
 
   traefik:
     image: "traefik:v2.2"
-    container_name: "traefik"
     ports:
      - "80:80"
      - "8080:8080"
     command:
-      - --api
       - --docker
       - --docker.swarmmode
-      - --docker.watch
-      - --entrypoints=Name:http Address::80 
+      - --entrypoints.traefik.web=80 
       - --logLevel=INFO
       - --accessLog
+      - --api
+      - --api.insecure
     deploy:
       placement:
         constraints: [node.role == manager]
