@@ -10,9 +10,6 @@ services:
     command:
       - --docker
       - --docker.swarmmode
-      - --entrypoints.traefik.web=80 
-      - --logLevel=INFO
-      - --accessLog
       - --api
       - --api.insecure
     deploy:
