@@ -5,6 +5,9 @@ services:
   traefik:
     image: "traefik:v2.2"
     container_name: "traefik"
+    ports:
+     - "80:80"
+     - "8080:8080"
     command:
       - --api
       - --docker
@@ -31,7 +34,7 @@ services:
       labels:
        - traefik.port=8080
        - traefik.docker.network=proxy
-       - traefik.frontend.rule=Host:node-app.cometari.com
+       - traefik.frontend.rule=Host:chile.backoffice
       resources:
         limits:
          memory: 128M
@@ -42,13 +45,18 @@ services:
 
   peru:
     image: "backend-service"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.port=8080"
-      - "traefik.http.routers.peru.rule=Host(`pe.localhost`)"
-      - "traefik.http.routers.pe-service.entrypoints=web"
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+       - traefik.port=8080
+       - traefik.docker.network=proxy
+       - traefik.frontend.rule=Host:peru.backoffice
+      resources:
+        limits:
+         memory: 128M
     networks:
-      default
+      - default
       - traefik-net
 
 networks:
