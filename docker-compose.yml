@@ -20,7 +20,8 @@ services:
      mode: replicated
      replicas: 1
     networks:
-      - traefik
+      - default
+      - traefik-net
 
   chile:
     image: "backend-service"
@@ -35,7 +36,8 @@ services:
         limits:
          memory: 128M
     networks:
-      - traefik
+      - default
+      - traefik-net
 
 
   peru:
@@ -46,9 +48,11 @@ services:
       - "traefik.http.routers.peru.rule=Host(`pe.localhost`)"
       - "traefik.http.routers.pe-service.entrypoints=web"
     networks:
-      - traefik
+      default
+      - traefik-net
 
 networks:
+  default:
   traefik:
     external: true
       
