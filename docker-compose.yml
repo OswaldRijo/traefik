@@ -14,14 +14,13 @@ services:
       - --docker.swarmmode
       - --docker.watch
       - --entrypoints=Name:http Address::80 
-      - --defaultentrypoints=http
       - --logLevel=INFO
       - --accessLog
     deploy:
-     placement:
-      constraints: [node.role == manager]
-     mode: replicated
-     replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      mode: replicated
+      replicas: 1
     networks:
       - default
       - traefik-net
