@@ -1,0 +1,49 @@
+version: "3.3"
+
+services:
+
+  traefik:
+    image: "traefik:v2.2"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.debug=true"
+      - "--api.insecure=true"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.swarmMode=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=traefik-public"
+      - "--entrypoints.web.address=:8080"
+    ports:
+      - "80:8080"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - traefik
+
+  chile:
+    image: "backend-service"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.test-chile.rule=Host(`test-chile`)"
+      - "traefik.http.routers.test-chile.entrypoints=web"
+      - "traefik.http.services.test-chile.loadbalancer.server.port=8080"
+    networks:
+      - traefik
+
+
+  peru:
+    image: "backend-service"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=8080"
+      - "traefik.http.routers.peru.rule=Host(`pe.localhost`)"
+      - "traefik.http.routers.pe-service.entrypoints=web"
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
+      
