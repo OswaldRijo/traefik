@@ -6,29 +6,34 @@ services:
     image: "traefik:v2.2"
     container_name: "traefik"
     command:
-      #- "--log.level=DEBUG"
-      - "--api.debug=true"
-      - "--api.insecure=true"
-      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
-      - "--providers.docker.swarmMode=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=traefik-public"
-      - "--entrypoints.web.address=:8080"
-    ports:
-      - "80:8080"
-      - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - --api
+      - --docker
+      - --docker.swarmmode
+      - --docker.watch
+      - --entrypoints=Name:http Address::80 
+      - --defaultentrypoints=http
+      - --logLevel=INFO
+      - --accessLog
+    deploy:
+     placement:
+      constraints: [node.role == manager]
+     mode: replicated
+     replicas: 1
     networks:
       - traefik
 
   chile:
     image: "backend-service"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.test-chile.rule=Host(`test-chile`)"
-      - "traefik.http.routers.test-chile.entrypoints=web"
-      - "traefik.http.services.test-chile.loadbalancer.server.port=8080"
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+       - traefik.port=8080
+       - traefik.docker.network=proxy
+       - traefik.frontend.rule=Host:node-app.cometari.com
+      resources:
+        limits:
+         memory: 128M
     networks:
       - traefik
 
