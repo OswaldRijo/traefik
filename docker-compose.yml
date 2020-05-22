@@ -8,8 +8,10 @@ services:
      - "80:80"
      - "8080:8080"
     command:
-      - --api
-      - --api.insecure
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
     deploy:
       placement:
         constraints: [node.role == manager]
@@ -25,9 +27,9 @@ services:
       mode: replicated
       replicas: 1
       labels:
-       - traefik.port=8080
-       - traefik.docker.network=proxy
-       - traefik.frontend.rule=Host:chile.backoffice
+       - "traefik.port=8080"
+       - "traefik.docker.network=proxy"
+       - "traefik.frontend.rule=Host:chile.backoffice"
       resources:
         limits:
          memory: 128M
@@ -42,9 +44,9 @@ services:
       mode: replicated
       replicas: 1
       labels:
-       - traefik.port=8080
-       - traefik.docker.network=proxy
-       - traefik.frontend.rule=Host:peru.backoffice
+       - "traefik.port=8080"
+       - "traefik.docker.network=proxy"
+       - "traefik.frontend.rule=Host:peru.backoffice"
       resources:
         limits:
          memory: 128M
