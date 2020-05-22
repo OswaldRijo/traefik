@@ -61,6 +61,6 @@ services:
 
 networks:
   default:
-  traefik:
+  traefik-net:
     external: true
       
