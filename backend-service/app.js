@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(compression());
 
-app.get(`/v1/health`, (req, res) => {
-  res.send(`${process.env.COUNTRY} up and running.`);
+app.get(`/${process.env.VERSION} || v1/health`, (req, res) => {
+  res.send(`${process.env.COUNTRY} - ${process.env.VERSION || 'v1'} up and running.`);
 });
 
 app.use((err, req, res, next) => { // eslint-disable-line
