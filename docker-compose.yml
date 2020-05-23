@@ -20,6 +20,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
+      - default
       - traefik-net
 
   chile:
@@ -35,6 +36,8 @@ services:
       resources:
         limits:
          memory: 128M
+    networks:
+      - default
 
   peru:
     image: "backend-service"
@@ -48,8 +51,11 @@ services:
       resources:
         limits:
          memory: 128M
+    networks:
+      - default
 
 networks:
+  default:
   traefik-net:
     external: true
       
