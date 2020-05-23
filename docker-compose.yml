@@ -14,7 +14,7 @@ services:
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.swarmMode=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=traefik-public"
+      - "--providers.docker.network=traefik-net"
       - "--entrypoints.web.address=:80"
     deploy:
       placement:
