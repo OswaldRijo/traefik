@@ -34,7 +34,7 @@ services:
       mode: replicated
       replicas: 1
       labels:
-        - "traefik.http.routers.chile.rule=PathPrefix(`/backoffice`)"
+        - "traefik.http.routers.chile.rule=PathPrefix(`/`)"
         - "traefik.http.services.chile-service.loadbalancer.server.port=8080"
       resources:
         limits:
