@@ -33,7 +33,7 @@ services:
         - "traefik.enable=true"
         - "traefik.backend=chile"
         - "traefik.docker.network=proxy"
-        - "traefik.frontend.rule=Host(`backoffice.chile)"
+        - "traefik.frontend.rule=Host(`backoffice.chile`)"
       resources:
         limits:
          memory: 128M
