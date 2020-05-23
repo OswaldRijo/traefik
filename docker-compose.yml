@@ -5,7 +5,7 @@ services:
   traefik:
     image: "traefik:v2.2"
     ports:
-     - "80:80"
+     - "8080:80"
      - "8080:8080"
     command:
       - "--api.debug=true"
@@ -53,6 +53,7 @@ services:
         - "traefik.enable=true"
         - "traefik.docker.network=proxy"
         - "traefik.frontend.rule=Host(`backoffice.peru)"
+        - "traefik.port=8080"
       resources:
         limits:
          memory: 128M
