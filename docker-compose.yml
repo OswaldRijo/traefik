@@ -32,7 +32,7 @@ services:
         - "traefik.enable=true"
         - "traefik.http.routers.backoffice-service-cl.service=backoffice-service-cl"    
         - "traefik.http.routers.service-cl.rule=Host(`backoffice.service.cl`)"
-        - "traefik.http.services.backoffice-service-cl-service.loadbalancer.server.port=8080
+        - "traefik.http.services.backoffice-service-cl-service.loadbalancer.server.port=8080"
         - "traefik.docker.network=proxy"
       resources:
         limits:
