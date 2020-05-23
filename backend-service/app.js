@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(compression());
 
-app.get(`/${process.env.VERSION} || v1/health`, (req, res) => {
+app.get(`/${process.env.VERSION || 'v1'} /health`, (req, res) => {
   res.send(`${process.env.COUNTRY} - ${process.env.VERSION || 'v1'} up and running.`);
 });
 
