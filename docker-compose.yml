@@ -33,7 +33,6 @@ services:
         - "traefik.http.routers.backoffice-service-cl.service=backoffice-service-cl"    
         - "traefik.http.routers.backoffice-service-cl.rule=Host(`backoffice.service.cl`)"
         - "traefik.http.services.backoffice-service-cl.loadbalancer.server.port=8080"
-        - "traefik.docker.network=proxy"
       resources:
         limits:
          memory: 128M
