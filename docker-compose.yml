@@ -30,7 +30,8 @@ services:
       replicas: 1
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.backoffice-service-cl.service=backoffice-service-cl"    
+        - "traefik.http.routers.backoffice-service-cl.service=backoffice-service-cl"   
+        - "traefik.http.routers.backoffice-service-cl.entrypoints=web" 
         - "traefik.http.routers.backoffice-service-cl.rule=Host(`backoffice.service.cl`)"
         - "traefik.http.services.backoffice-service-cl.loadbalancer.server.port=8080"
       resources:
