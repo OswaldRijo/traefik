@@ -18,7 +18,7 @@ services:
       mode: replicated
       replicas: 1
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
       - default
       - traefik-net
@@ -29,9 +29,11 @@ services:
       mode: replicated
       replicas: 1
       labels:
+        - "traefik.port=8080"
         - "traefik.enable=true"
+        - "traefik.backend=chile"
         - "traefik.docker.network=proxy"
-        - "traefik.frontend.rule=Host(`backoffice.chile`)"
+        - "traefik.frontend.rule=Host(`backoffice.chile)"
       resources:
         limits:
          memory: 128M
@@ -44,9 +46,9 @@ services:
       mode: replicated
       replicas: 1
       labels:
-       - "traefik.port=8080"
-       - "traefik.docker.network=proxy"
-       - "traefik.frontend.rule=Host:peru.backoffice"
+        - "traefik.enable=true"
+        - "traefik.docker.network=proxy"
+        - "traefik.frontend.rule=Host(`backoffice.peru)"
       resources:
         limits:
          memory: 128M
