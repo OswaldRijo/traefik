@@ -23,17 +23,17 @@ services:
       - default
       - traefik-net
 
-  chile:
+  service-cl:
     image: "backend-service"
     deploy:
       mode: replicated
       replicas: 1
       labels:
-        - "traefik.port=8080"
         - "traefik.enable=true"
-        - "traefik.backend=chile"
+        - "traefik.http.routers.backoffice-service-cl.service=backoffice-service-cl"    
+        - "traefik.http.routers.service-cl.rule=Host(`backoffice.service.cl`)"
+        - "traefik.http.services.backoffice-service-cl-service.loadbalancer.server.port=8080
         - "traefik.docker.network=proxy"
-        - "traefik.frontend.rule=Host(`backoffice.chile`)"
       resources:
         limits:
          memory: 128M
