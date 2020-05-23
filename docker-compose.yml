@@ -14,7 +14,7 @@ services:
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.swarmMode=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=traefik-net"
+      - "--providers.docker.network=default"
       - "--entrypoints.web.address=:80"
     deploy:
       placement:
@@ -34,7 +34,7 @@ services:
       replicas: 1
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.service-cl.service=backoffice-service-cl"   
+        - "traefik.http.routers.backoffice-service-c.service=backoffice-service-cl"   
         - "traefik.http.routers.backoffice-service-cl.entrypoints=web" 
         - "traefik.http.routers.backoffice-service-cl.rule=Host(`backoffice.service.cl`)"
         - "traefik.http.services.backoffice-service-cl.loadbalancer.server.port=8080"
