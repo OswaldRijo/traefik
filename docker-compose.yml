@@ -10,7 +10,6 @@ services:
     command:
       - "--api.insecure=true"
       - "--providers.docker=true"
-      - "--traefik.frontend.rule=Host:traefik.monitor"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
     deploy:
