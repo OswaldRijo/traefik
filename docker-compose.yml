@@ -29,7 +29,7 @@ services:
       - traefik-net
 
   chile:
-    image: "backend-service"
+    image: "ostechub/backend-service:test"
     deploy:
       mode: replicated
       replicas: 1
@@ -45,7 +45,7 @@ services:
 
 
   peru-v2:
-    image: "backend-service"
+    image: "ostechub/backend-service:test"
     environment: 
       COUNTRY: "PERU"
       VERSION: "v2"
@@ -63,7 +63,7 @@ services:
       - default
 
   peru:
-    image: "backend-service"
+    image: "ostechub/backend-service:test"
     environment: 
       COUNTRY: "PERU"
     deploy:
