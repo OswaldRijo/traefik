@@ -35,7 +35,7 @@ services:
         - "traefik.enable=true"
         - "traefik.http.routers.ch.rule=HeadersRegexp(`country`, `cl`) && PathPrefix(`/v1`)"
         - "traefik.http.services.ch-service.loadbalancer.server.port=8080"
-        - "traefik.http.routers.pe.entrypoints=intg"        
+        - "traefik.http.routers.ch.entrypoints=intg"        
       resources:
         limits:
          memory: 128M
@@ -55,7 +55,7 @@ services:
         - "traefik.enable=true"
         - "traefik.http.routers.pe-v2.rule=HeadersRegexp(`country`, `pe`) && PathPrefix(`/v2`)"
         - "traefik.http.services.pe-v2-service.loadbalancer.server.port=8080"
-        - "traefik.http.routers.pe.entrypoints=intg"
+        - "traefik.http.routers.pe-v2.entrypoints=intg"
       resources:
         limits:
          memory: 128M

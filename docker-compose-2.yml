@@ -35,6 +35,7 @@ services:
         - "traefik.enable=true"
         - "traefik.http.routers.chile.rule=HeadersRegexp(`country`, `cl`) && PathPrefix(`/v1`)"
         - "traefik.http.services.chile-service.loadbalancer.server.port=8080"
+        - "traefik.http.routers.chile.entrypoints=backoffice"
       resources:
         limits:
          memory: 128M
@@ -54,6 +55,7 @@ services:
         - "traefik.enable=true"
         - "traefik.http.routers.peru-v2.rule=HeadersRegexp(`country`, `pe`) && PathPrefix(`/v2`)"
         - "traefik.http.services.peru-v2-service.loadbalancer.server.port=8080"
+        - "traefik.http.routers.peru-v2.entrypoints=backoffice"
       resources:
         limits:
          memory: 128M
@@ -68,8 +70,6 @@ services:
       mode: replicated
       replicas: 1
       labels:
-        - "traefik.backend=peru"
-        - "traefik.docker.network=default"
         - "traefik.http.routers.peru.rule=PathPrefix(`/`)"
         - "traefik.http.routers.peru.entrypoints=backoffice"
         - "traefik.http.services.peru-service.loadbalancer.server.port=8080"
