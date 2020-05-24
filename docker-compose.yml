@@ -6,6 +6,7 @@ services:
     image: "traefik:v2.2"
     ports:
      - "80:80"
+     - "8080:8080"
     command:
       - "--api.debug=true"
       - "--api.insecure=true"
