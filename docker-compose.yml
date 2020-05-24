@@ -70,8 +70,10 @@ services:
       mode: replicated
       replicas: 1
       labels:
+        - "traefik.http.routers.peru.service=test_peru"
         - "traefik.http.routers.peru.rule=PathPrefix(`/`)"
         - "traefik.http.services.test_peru.loadbalancer.server.port=8080"
+        - "traefik.http.routers.peru.entrypoints=web"
       resources:
         limits:
          memory: 128M
