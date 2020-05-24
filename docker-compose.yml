@@ -6,7 +6,6 @@ services:
     image: "traefik:v2.2"
     ports:
      - "80:80"
-     - "8080:8080"
     command:
       - "--api.debug=true"
       - "--api.insecure=true"
@@ -26,16 +25,16 @@ services:
       - default
       - traefik-net
 
-  ch:
+  chile:
     image: "ostechub/backend-service:test"
     deploy:
       mode: replicated
       replicas: 1
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.ch.rule=HeadersRegexp(`country`, `cl`) && PathPrefix(`/v1`)"
-        - "traefik.http.services.ch-service.loadbalancer.server.port=8080"
-        - "traefik.http.routers.ch.entrypoints=intg"        
+        - "traefik.http.routers.chile.rule=HeadersRegexp(`country`, `cl`) && PathPrefix(`/v1`)"
+        - "traefik.http.services.chile-service.loadbalancer.server.port=8080"
+        - "traefik.http.routers.chile.entrypoints=intg"        
       resources:
         limits:
          memory: 128M
@@ -43,7 +42,7 @@ services:
       - default
 
 
-  pe-v2:
+  peru-v2:
     image: "ostechub/backend-service:test"
     environment: 
       COUNTRY: "PERU"
@@ -53,16 +52,16 @@ services:
       replicas: 1
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.pe-v2.rule=HeadersRegexp(`country`, `pe`) && PathPrefix(`/v2`)"
-        - "traefik.http.services.pe-v2-service.loadbalancer.server.port=8080"
-        - "traefik.http.routers.pe-v2.entrypoints=intg"
+        - "traefik.http.routers.peru-v2.rule=HeadersRegexp(`country`, `pe`) && PathPrefix(`/v2`)"
+        - "traefik.http.services.peru-v2-service.loadbalancer.server.port=8080"
+        - "traefik.http.routers.peru-v2.entrypoints=intg"
       resources:
         limits:
          memory: 128M
     networks:
       - default
 
-  pe:
+  peru:
     image: "ostechub/backend-service:test"
     environment: 
       COUNTRY: "PERU"
@@ -70,9 +69,9 @@ services:
       mode: replicated
       replicas: 1
       labels:
-        - "traefik.http.routers.pe.rule=PathPrefix(`/`)"
-        - "traefik.http.services.pe-service.loadbalancer.server.port=8080"
-        - "traefik.http.routers.pe.entrypoints=intg"
+        - "traefik.http.routers.peru.rule=PathPrefix(`/`)"
+        - "traefik.http.services.peru-service.loadbalancer.server.port=8080"
+        - "traefik.http.routers.peru.entrypoints=intg"
       resources:
         limits:
          memory: 128M
