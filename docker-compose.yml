@@ -25,6 +25,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - default
+      - traefik-net
 
   chile:
     image: "ostechub/backend-service:test"
@@ -71,11 +72,12 @@ services:
     environment: 
       COUNTRY: "PERU"
     deploy:
-      mode: replicated
       replicas: 1
       labels:
         - "traefik.http.routers.peru.rule=PathPrefix(`/`)"
+        - "traefik.http.routers.peru.service=peru-service"
         - "traefik.http.services.peru-service.loadbalancer.server.port=8080"
+        - "traefik.http.services.peru-service.loadbalancer.server.scheme=http"
       resources:
         limits:
          memory: 128M
