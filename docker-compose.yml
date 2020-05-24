@@ -28,6 +28,8 @@ services:
 
   chile:
     image: "ostechub/backend-service:test"
+    ports:
+      - "8080:8080"
     deploy:
       mode: replicated
       replicas: 1
@@ -44,6 +46,8 @@ services:
 
   peru-v2:
     image: "ostechub/backend-service:test"
+    ports:
+      - "8080:8080"
     environment: 
       COUNTRY: "PERU"
       VERSION: "v2"
@@ -62,6 +66,8 @@ services:
 
   peru:
     image: "ostechub/backend-service:test"
+    ports:
+      - "8080:8080"
     environment: 
       COUNTRY: "PERU"
     deploy:
