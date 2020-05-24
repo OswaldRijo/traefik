@@ -2,11 +2,11 @@ version: "3.3"
 
 services:
 
-  traefik:
+  lb:
     image: "traefik:v2.2"
     ports:
-     - "80:80"
-     - "8080:8080"
+     - "8000:80"
+     - "8081:8080"
     command:
       - "--api.debug=true"
       - "--api.insecure=true"
