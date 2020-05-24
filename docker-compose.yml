@@ -15,7 +15,7 @@ services:
       - "--providers.docker.swarmMode=true"
       - "--providers.docker.exposedbydefault=true" #si esta en false, ignora los containers que no tengan traefik.enable=true
       - "--providers.docker.network=default"
-      - "--providers.docker.useBindPortIP=true"
+      - "--providers.docker.useBindPortIP=false"
     deploy:
       placement:
         constraints: [node.role == manager]
