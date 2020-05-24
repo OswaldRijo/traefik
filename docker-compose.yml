@@ -16,7 +16,6 @@ services:
       - "--providers.docker.exposedbydefault=true" #si esta en false, ignora los containers que no tengan traefik.enable=true
       - "--providers.docker.network=default"
       - "--providers.docker.useBindPortIP=true"
-      - "--entrypoints.web.address=:80"
     deploy:
       placement:
         constraints: [node.role == manager]
@@ -72,7 +71,6 @@ services:
       labels:
         - "traefik.http.routers.peru.rule=PathPrefix(`/`)"
         - "traefik.http.services.peru-service.loadbalancer.server.port=8080"
-        - "traefik.http.routers.peru.entrypoints=web"
       resources:
         limits:
          memory: 128M
